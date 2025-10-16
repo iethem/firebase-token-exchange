@@ -3,222 +3,49 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Firebase Token Generator</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 20px;
-        }
-
-        .container {
-            background: white;
-            border-radius: 12px;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-            padding: 40px;
-            max-width: 600px;
-            width: 100%;
-        }
-
-        h1 {
-            text-align: center;
-            color: #333;
-            margin-bottom: 30px;
-            font-size: 2rem;
-            font-weight: 600;
-        }
-
-        .form-group {
-            margin-bottom: 25px;
-        }
-
-        label {
-            display: block;
-            margin-bottom: 8px;
-            color: #555;
-            font-weight: 500;
-        }
-
-        textarea, input {
-            width: 100%;
-            padding: 12px;
-            border: 2px solid #e1e5e9;
-            border-radius: 8px;
-            font-size: 14px;
-            transition: border-color 0.3s ease;
-            font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
-        }
-
-        textarea {
-            min-height: 120px;
-            resize: vertical;
-        }
-
-        textarea:focus, input:focus {
-            outline: none;
-            border-color: #667eea;
-        }
-
-        .error {
-            border-color: #e74c3c !important;
-        }
-
-        .success {
-            border-color: #27ae60 !important;
-        }
-
-        .error-message {
-            color: #e74c3c;
-            font-size: 12px;
-            margin-top: 5px;
-            display: none;
-        }
-
-        .success-message {
-            color: #27ae60;
-            font-size: 12px;
-            margin-top: 5px;
-            display: none;
-        }
-
-        .btn {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            border: none;
-            padding: 12px 24px;
-            border-radius: 8px;
-            cursor: pointer;
-            font-size: 16px;
-            font-weight: 500;
-            transition: transform 0.2s ease;
-            width: 100%;
-        }
-
-        .btn:hover {
-            transform: translateY(-2px);
-        }
-
-        .btn:disabled {
-            background: #bdc3c7;
-            cursor: not-allowed;
-            transform: none;
-        }
-
-        .result {
-            margin-top: 20px;
-            padding: 15px;
-            background: #f8f9fa;
-            border-radius: 8px;
-            border-left: 4px solid #667eea;
-            display: none;
-        }
-
-        .result h3 {
-            color: #333;
-            margin-bottom: 10px;
-        }
-
-        .token-display {
-            background: #2c3e50;
-            color: #ecf0f1;
-            padding: 15px;
-            border-radius: 6px;
-            font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
-            font-size: 12px;
-            word-break: break-all;
-            margin-bottom: 10px;
-        }
-
-        .copy-btn {
-            background: #27ae60;
-            color: white;
-            border: none;
-            padding: 8px 16px;
-            border-radius: 6px;
-            cursor: pointer;
-            font-size: 14px;
-            transition: background 0.3s ease;
-        }
-
-        .copy-btn:hover {
-            background: #229954;
-        }
-
-        .loading {
-            display: none;
-            text-align: center;
-            color: #667eea;
-            margin-top: 10px;
-        }
-
-        .spinner {
-            border: 2px solid #f3f3f3;
-            border-top: 2px solid #667eea;
-            border-radius: 50%;
-            width: 20px;
-            height: 20px;
-            animation: spin 1s linear infinite;
-            display: inline-block;
-            margin-right: 10px;
-        }
-
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-    </style>
+    <title>Firebase Token Exchange</title>
 </head>
 <body>
-    <div class="container">
-        <h1>Firebase Token Generator</h1>
-        
-        <form id="tokenForm">
-            <div class="form-group">
-                <label for="firebaseConfig">Firebase Config JSON:</label>
-                <textarea 
-                    id="firebaseConfig" 
-                    placeholder="Paste your Firebase config JSON here..."
-                    required
-                ></textarea>
-                <div class="error-message" id="configError"></div>
-                <div class="success-message" id="configSuccess"></div>
-            </div>
-
-            <div class="form-group">
-                <label for="customToken">Custom Token:</label>
-                <input 
-                    type="text" 
-                    id="customToken" 
-                    placeholder="Enter your custom token here..."
-                    required
-                />
-            </div>
-
-            <button type="submit" class="btn" id="generateBtn">
-                Generate Access Token
-            </button>
-        </form>
-
-        <div class="loading" id="loading">
-            <div class="spinner"></div>
-            Generating access token...
+    <h1>Firebase Token Exchange</h1>
+    
+    <form id="tokenForm">
+        <div>
+            <label for="firebaseConfig">Firebase Config JSON:</label><br>
+            <textarea 
+                id="firebaseConfig" 
+                placeholder="Paste your Firebase config JSON here..."
+                rows="10"
+                cols="80"
+                required
+            ></textarea><br>
+            <div id="configError"></div>
+            <div id="configSuccess"></div>
         </div>
 
-        <div class="result" id="result">
-            <h3>Access Token Generated Successfully!</h3>
-            <div class="token-display" id="accessToken"></div>
-            <button class="copy-btn" id="copyBtn">Copy to Clipboard</button>
+        <div>
+            <label for="customToken">Custom Token:</label><br>
+            <textarea 
+                id="customToken" 
+                placeholder="Enter your custom token here..."
+                rows="10"
+                cols="80"
+                required
+            ></textarea><br><br>
         </div>
+
+        <button type="submit" id="generateBtn">
+            Generate Access Token
+        </button>
+    </form>
+
+    <div id="loading" style="display: none;">
+        Generating access token...
+    </div>
+
+    <div id="result" style="display: none;">
+        <h3>Access Token Generated Successfully!</h3>
+        <textarea id="accessToken" rows="10" cols="80" readonly></textarea><br>
+        <button id="copyBtn">Copy to Clipboard</button>
     </div>
 
     <!-- Firebase SDK -->
@@ -235,7 +62,6 @@
             const successDiv = document.getElementById('configSuccess');
             
             // Clear previous states
-            this.classList.remove('error', 'success');
             errorDiv.style.display = 'none';
             successDiv.style.display = 'none';
 
@@ -244,7 +70,16 @@
             }
 
             try {
-                const config = JSON.parse(configText);
+                let config;
+                
+                // Try to parse as JSON first
+                try {
+                    config = JSON.parse(configText);
+                } catch (jsonError) {
+                    // If JSON parsing fails, try to evaluate as JavaScript object
+                    // This allows for JS object literals like { apiKey: "value", authDomain: "value" }
+                    config = eval('(' + configText + ')');
+                }
                 
                 // Validate required Firebase config fields
                 const requiredFields = ['apiKey', 'authDomain', 'projectId'];
@@ -255,13 +90,11 @@
                 }
 
                 // Valid config
-                this.classList.add('success');
                 successDiv.textContent = '✓ Valid Firebase configuration';
                 successDiv.style.display = 'block';
                 
             } catch (error) {
-                this.classList.add('error');
-                errorDiv.textContent = `✗ Invalid JSON: ${error.message}`;
+                errorDiv.textContent = `✗ Invalid JSON/JS Object: ${error.message}`;
                 errorDiv.style.display = 'block';
             }
         });
@@ -288,7 +121,13 @@
                 result.style.display = 'none';
 
                 // Parse and validate config
-                const config = JSON.parse(configText);
+                let config;
+                try {
+                    config = JSON.parse(configText);
+                } catch (jsonError) {
+                    // If JSON parsing fails, try to evaluate as JavaScript object
+                    config = eval('(' + configText + ')');
+                }
                 
                 // Initialize Firebase if not already done or if config changed
                 if (!firebaseApp || firebaseApp.options.apiKey !== config.apiKey) {
