@@ -1,4 +1,4 @@
-# Firebase Token Exchange
+# [Firebase Token Exchange](https://ethem.dev/firebase-token-exchange)
 
 <img width="708" height="517" alt="image" src="https://github.com/user-attachments/assets/36f2df43-3ab0-4abd-b36e-514878b2ce09" />
 
@@ -16,6 +16,10 @@ A simple static HTML tool for exchanging Firebase custom tokens for access token
 
 ## Usage
 
+### Option 1: Live Demo
+Try the tool online at: **[https://ethem.dev/firebase-token-exchange](https://ethem.dev/firebase-token-exchange)**
+
+### Option 2: Local Usage
 1. Open `index.html` in your web browser
 2. Paste your Firebase configuration in the first textarea (supports both JSON and JS object formats)
 3. Enter your custom token in the second textarea
