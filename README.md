@@ -1,5 +1,8 @@
 # Firebase Token Exchange
 
+<img width="708" height="517" alt="image" src="https://github.com/user-attachments/assets/36f2df43-3ab0-4abd-b36e-514878b2ce09" />
+
+
 A simple static HTML tool for exchanging Firebase custom tokens for access tokens. This utility allows you to generate Firebase access tokens from custom tokens, which can then be used for API requests via curl, Postman, or other HTTP clients.
 
 ## Features
